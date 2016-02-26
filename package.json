@@ -8,7 +8,8 @@
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
     "ejs": "^2.4.1",
-    "express": "4.13.4"
+    "express": "4.13.4",
+    "pg": "^4.5.1"
   },
   "scripts": {
     "start": "node app.js"
