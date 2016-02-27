@@ -3,59 +3,102 @@ var db = require("./db");
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
-		passport.serializeUser(function (user, done) {
-			done(null, user.id);
+	passport.serializeUser(function (user, done) {
+		done(null, user.id);
+	});
+
+	passport.deserializeUser(function (id, done) {
+		db("admins").where("aid", id).limit(1)
+		.then(function (row) {
+			if (rows.constructor === Array) { row = row[0]; }
+			done(null, rows);
+		})
+		.catch(function (err) {
+			done(err, null);
 		});
+	});
 
-		passport.deserializeUser(function (id, done) {
-			db("admins").where("aid", id).limit(1)
-			.then(function (row) {
-				if (rows.constructor === Array) { row = row[0]; }
-				done(null, rows);
-			})
-			.catch(function (err) {
-				done(err, null);
-			});
-		});
+	passport.use("local-signup", new local({
+			usernameField: "email",
+			passwordField: "pass",
+			passReqToCallback: true
+		},
 
-		passport.use("local-signup", new local({
-				usernameField: "name",
-				passwordField: "pass",
-				passReqToCallback: true
-			},
+		function (req, email, password, done) {
+			process.nextTick(function () {
 
-			function (req, email, password, done) {
-				process.nextTick(function () {
+				db("admins").where("email", email).limit(1)
+				.then(function (admin) {
+					if (admin.constructor === Array && admin.length == 1) {
+						return done(null, false);
+					} else {
+						var new_admin = {};
+						new_admin.email = email;
+						new_admin.password = password;
 
-					db("admins").where("aid", id).limit(1)
-					.then(function (row) {
-						if (rows.constructor === Array) { row = row[0]; }
-						done(null, rows);
-					})
-					.catch(function (err) {
-						done(err, null);
-					})
+						// insert the new admin user
+						db("admins").insert(new_admin)
+						.then(function () {
 
-					User.findOne({ "local.email" :  email }, function(err, user) {
-						if (err)
-							return done(err);
-
-						if (user) {
-							return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-						} else {
-							var newUser = new User();
-
-							newUser.local.email = email;
-							newUser.local.password = newUser.generateHash(password);
-
-							newUser.save(function(err) {
-								if (err)
-									throw err;
-								return done(null, newUser);
+							// query to get the new result, needs to be refactored
+							db("admins").where("email", email).limit(1)
+							.then(function (admin) {
+								if (admin.constructor === Array && admin.length == 1) {
+									return done(null, admin[0]);
+								} else {
+									return done(null, false)
+								};
+							})
+							.catch(function (err) {
+								return done(err);
 							});
+
+						})
+						.catch(function (err) {
+							return done(err);
+						});
+					}
+				})
+				.catch(function (err) {
+					return done(err);
+				})
+			});
+		})
+	);
+
+	passport.use("local-login", new local({
+			usernameField: "email",
+			passwordField: "pass",
+			passReqToCallback: true
+		},
+
+		function (req, email, password, done) {
+			process.nextTick(function () {
+
+				db("admins").where("email", email).limit(1)
+				.then(function (admin) {
+					if (admin.constructor === Array && admin.length == 1) {
+						admin = admin[0];
+						if (admin.password == password) {
+							return done(null, user);
+							
+						// fails because bad password
+						} else {
+							return done(null, false);
 						}
-					});
-				});
-			})
-		);
+					} else {
+						return done(null, false);
+					}
+				})
+				.catch(function (err) {
+					return done(err);
+				})
+			});
+		})
+	);
 };
+
+
+
+
+
