@@ -1,211 +1,233 @@
 <% include header %>
 
-		<form method="post">
-			<b>Create a new entry</b>
+	<form method="post">
+		<b>Create a new entry</b>
 
-			<table>
+		<small class="details" style="float: right;">
+			* Required
+		</small>
 
-				<tr>
-					<td>
-						<br>Name
-					</td>
-				</tr>
+		<table>
 
-				<tr>
-					<td>
-						<span class="details">First</span>
-					</td>
-					<td>
-						<input type="text" name="first" placeholder="First" required>
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<br>Name
+				</td>
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Middle (optional)</span>
-					</td>
-					<td>
-						<input type="text" name="middle" placeholder="Middle (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">First*</span>
+				</td>
+				<td>
+					<input type="text" name="first" placeholder="First" required>
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Last</span>
-					</td>
-					<td>
-						<input type="text" name="last" placeholder="Last" required>
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Middle (optional)</span>
+				</td>
+				<td>
+					<input type="text" name="middle" placeholder="Middle (optional)">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<br>Details
-					</td>
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Last*</span>
+				</td>
+				<td>
+					<input type="text" name="last" placeholder="Last" required>
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Gender</span>
-					</td>
-					<td>
-						<select name="gender">
-							<option value="" selected disabled>Gender (optional)</option>
-							<option value="M">Male</option>
-							<option value="F">Female</option>
-							<option value="O">Other</option>
-						</select>
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<br>Details
+				</td>
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">DOB Year</span>
-					</td>
-					<td>
-						<input type="number" name="year" min="1900" max="2016" placeholder="1920">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Gender</span>
+				</td>
+				<td>
+					<select name="gender">
+						<option value="" selected disabled>Gender (optional)</option>
+						<option value="M">Male</option>
+						<option value="F">Female</option>
+						<option value="O">Other</option>
+					</select>
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">DOB Month</span>
-					</td>
-					<td>
-						<input type="number" name="month" min="1" max="12" placeholder="1">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">DOB Year</span>
+				</td>
+				<td>
+					<input type="number" name="year" min="1900" max="2016" placeholder="1920">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">DOB Day</span>
-					</td>
-					<td>
-						<input type="number" name="day" min="1" max="31" placeholder="1">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">DOB Month</span>
+				</td>
+				<td>
+					<input type="number" name="month" min="1" max="12" placeholder="1">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<br>Offense
-					</td>
-				</tr>
+			<tr>
+				<td>
+					<span class="details">DOB Day</span>
+				</td>
+				<td>
+					<input type="number" name="day" min="1" max="31" placeholder="1">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Charge Level</span>
-					</td>
-					<td>
-						<select name="charge_lvl">
-							<option value="" selected disabled>Charge Level (optional)</option>
-							<option value="MC">MC</option>
-							<option value="MB">MB</option>
-							<option value="MA">MA</option>
-							<option value="F1">F1</option>
-							<option value="F2">F2</option>
-							<option value="F3">F3</option>
-						</select>
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<br>Offense
+				</td>
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Offense 1</span>
-					</td>
-					<td>
-						<input type="text" name="offense_1" placeholder="Offense 1 (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Charge Level</span>
+				</td>
+				<td>
+					<select name="charge_lvl">
+						<option value="" selected disabled>Charge Level (optional)</option>
+						<option value="MC">MC</option>
+						<option value="MB">MB</option>
+						<option value="MA">MA</option>
+						<option value="F1">F1</option>
+						<option value="F2">F2</option>
+						<option value="F3">F3</option>
+					</select>
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Offense 2</span>
-					</td>
-					<td>
-						<input type="text" name="offense_2" placeholder="Offense 2 (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Offense 1</span>
+				</td>
+				<td>
+					<input type="text" name="offense_1" placeholder="Offense 1 (optional)">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Offense 3</span>
-					</td>
-					<td>
-						<input type="text" name="offense_3" placeholder="Offense 3 (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Offense 2</span>
+				</td>
+				<td>
+					<input type="text" name="offense_2" placeholder="Offense 2 (optional)">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<br>Identifiers
-					</td>
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Offense 3</span>
+				</td>
+				<td>
+					<input type="text" name="offense_3" placeholder="Offense 3 (optional)">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Case Number</span>
-					</td>
-					<td>
-						<input type="text" name="case_num" placeholder="Case Number (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<br>Identifiers
+				</td>
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">OTN</span>
-					</td>
-					<td>
-						<input type="text" name="otn" placeholder="OTN (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Case Number</span>
+				</td>
+				<td>
+					<input type="text" name="case_num" placeholder="Case Number (optional)">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">SO</span>
-					</td>
-					<td>
-						<input type="text" name="so" placeholder="SO (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">OTN</span>
+				</td>
+				<td>
+					<input type="text" name="otn" placeholder="OTN (optional)">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<br>Officer
-					</td>
-				</tr>
+			<tr>
+				<td>
+					<span class="details">SO</span>
+				</td>
+				<td>
+					<input type="text" name="so" placeholder="SO (optional)">
+				</td> 
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Officer ID</span>
-					</td>
-					<td>
-						<input type="text" name="officer_id" placeholder="Officer ID (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<br>Officer
+				</td>
+			</tr>
 
-				<tr>
-					<td>
-						<span class="details">Notes</span>
-					</td>
-					<td>
-						<input type="text" name="notes" placeholder="Notes (optional)">
-					</td> 
-				</tr>
+			<tr>
+				<td>
+					<span class="details">Officer ID</span>
+				</td>
+				<td>
+					<input type="text" name="officer_id" placeholder="Officer ID (optional)">
+				</td> 
+			</tr>
 
-			</table>
+			<tr>
+				<td>
+					<span class="details">Police Department*</span>
+				</td>
+				<td>
+					<select name="police_dept" required>
+						<option value="" selected disabled>Police Department</option>
+						<option value="Unified">Unified</option>
+						<option value="Bluffdale">Bluffdale</option>
+						<option value="Cottonwood Heights">Cottonwood Heights</option>
+						<option value="Draper">Draper</option>
+						<option value="Herriman">Herriman</option>
+						<option value="Holladay">Holladay</option>
+						<option value="Midvale">Midvale</option>
+						<option value="Murray">Murray</option>
+						<option value="Riverton">Riverton</option>
+						<option value="Salt Lake City">Salt Lake City</option>
+						<option value="Salt Lake County Sheriff">Salt Lake County Sheriff</option>
+						<option value="Sandy">Sandy</option>
+						<option value="South Jordan">South Jordan</option>
+						<option value="South Salt Lake">South Salt Lake</option>
+						<option value="Taylorsville">Taylorsville</option>
+						<option value="West Jordan">West Jordan</option>
+						<option value="West Valley City">West Valley City</option>
+					</select>
+				</td> 
+			</tr>
 
-			<input type="submit" class="submit_btn" value="Submit">
+			<tr>
+				<td>
+					<span class="details">Additional Notes</span>
+				</td>
+				<td>
+					<input type="text" name="notes" placeholder="Additional Notes (optional)">
+				</td> 
+			</tr>
 
-		</form>
+		</table>
 
-		<div class="details" style="float: right;">
-			<br>
-			<small>
-				© 2016 Code for America
-			</small>
-		</div>
-		
-	</div>
+		<input type="submit" class="submit_btn" value="Submit">
 
-
+	</form>
+	
 <% include footer %>

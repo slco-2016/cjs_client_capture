@@ -26,6 +26,7 @@ exports.up = function(knex, Promise) {
 			table.string("notes");
 
 			table.string("officer_id");
+			table.string("police_dept");
 
 			table.boolean("processed").defaultTo(false);
 			

@@ -50,7 +50,7 @@ app.post("/new_entry", function (req, res) {
   if ( !(b.last && (b.last.length >= 1)) ) ok = false;
 
   if (ok) {
-  	//
+  	res.send("Succesful entry. <a href='/new_entry'>Return to entry page.</a>")
   } else {
   	res.send("Missing required entries. <a href='/new_entry'>Try again.</a>")
   }
