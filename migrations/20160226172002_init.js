@@ -19,6 +19,7 @@ exports.up = function(knex, Promise) {
 			table.string("offense_2");
 			table.string("offense_3");
 
+			table.boolean("warrant");
 			table.string("case_num");
 			table.string("so");
 			table.string("otn");
@@ -37,6 +38,7 @@ exports.up = function(knex, Promise) {
 		knex.schema.createTable("charge_lvl_stats", function(table) {
 
 			table.string("type");
+			table.boolean("warrant").defaultTo(false);
 			table.boolean("allowed").defaultTo(false);
 
 			table.timestamp("updated");
@@ -46,6 +48,17 @@ exports.up = function(knex, Promise) {
 
 			table.string("ocr_m");
 			table.string("ocr_f");
+
+			table.timestamp("updated");
+		}),
+
+		knex.schema.createTable("admins", function(table) {
+			table.increments("aid").primary();
+
+			table.name("name");
+			table.boolean("cjs_perms").defaultTo(false);
+			table.boolean("jail_perms").defaultTo(false);
+			table.boolean("super").defaultTo(false);
 
 			table.timestamp("updated");
 		})
@@ -58,7 +71,8 @@ exports.down = function(knex, Promise) {
 
 		knex.schema.dropTable("clients"),
 		knex.schema.dropTable("charge_lvl_stats"),
-		knex.schema.dropTable("jail_levels")
+		knex.schema.dropTable("jail_levels"),
+		knex.schema.dropTable("admins")
 
 	])
 };
