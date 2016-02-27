@@ -55,7 +55,7 @@ exports.up = function(knex, Promise) {
 		knex.schema.createTable("admins", function(table) {
 			table.increments("aid").primary();
 
-			table.name("name");
+			table.string("name");
 			table.boolean("cjs_perms").defaultTo(false);
 			table.boolean("jail_perms").defaultTo(false);
 			table.boolean("super").defaultTo(false);
