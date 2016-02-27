@@ -2,3 +2,4 @@ node_modules/
 .DS_Store
 creds.js
 npm-debug.log
+knexfile.js

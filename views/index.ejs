@@ -1,79 +1,8 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<% include header %>
 
-	<head>
-	  <meta charset="utf-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	  <title>CJS Intake Submission Form</title>
-	</head>
-
-	<style>
-		.details { 
-			color: rgba(0,0,0,0.5);
-			font-size: 0.65em;
-		}
-	</style>
-
-	<body style="font-family: arial, sans-serif;">
-		<div style="max-width: 420px; padding: 10px; box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.25); margin-left: auto; margin-right: auto">
-
-			<h3>
-				CJS Intake Submission Form
-			</h3>
-			<span class="details">
-				<b>ATTENTION:</b><br>
-				Must be a <u>DISTRICT COURT CASE</u> only from West Jordan or Salt Lake District Court.
-			</span>
-			<hr>
-
-			<form method="post">
-				<p><b>Create a new client</b></p>
-
-				<div>
-					Client Name <span class="details">(FIRST / MIDDLE (OPTIONAL) / LAST)</span>
-					<div>
-						<input type="text" name="first" placeholder="First" required>
-						<input type="text" name="middle" placeholder="Middle (OPTIONAL)">
-						<input type="text" name="last" placeholder="Last" required>
-					</div>
-				</div>
-
-				<br>
-
-				<div>
-					Date of Birth <span class="details">(YEAR / MONTH / DAY)</span>
-					<div>
-						<input type="number" name="year" min="1900" max="2016" placeholder="1920" required>
-						<input type="number" name="month" min="1" max="12" placeholder="1" required>
-						<input type="number" name="day" min="1" max="31" placeholder="1" required>
-					</div>
-				</div>
-
-				<br>
-
-				<div>
-					Optional Values
-					<div>
-						<input type="text" name="case_num" placeholder="Case Number">
-						<small class="details">(Case Number)</small>
-
-						<br><input type="text" name="so" placeholder="Sheriff Number">
-						<small class="details">(SO#)</small>
-
-						<br><input type="text" name="otn" placeholder="Offender Tracking Number">
-						<small class="details">(OTN)</small>
-
-					</div>
-					<input type="submit" value="Submit" style="font-size: 2em; font-weight: 900; float: right;">
-				</div>
-			</form>
-			<hr>
-		</div>
-
-		<div style="max-width: 420px; text-align: right; margin-left: auto; margin-right: auto; margin-top: 15px; font-size: 0.5em">
-			<span class="details"><small>© 2016 Code for America</small></span>
-		</div>
-
-	</body>
-
-</html>
+	<div>
+		<p><b>Links</b></p>
+		<a href="/new_entry">New Client Entry</a>
+	</div>
+				
+<% include footer %>

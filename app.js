@@ -14,23 +14,15 @@ app.use(bodyParser.json());
 
 // database
 var pg = require("pg");
-var creds = require("./creds.js")
-var conString = "postgres://" + creds.user + ":" + creds.password + "@" + creds.host + ":5432/" + creds.database;
-
-var db = require("knex")({
-	client: "postgresql",
-	connection: conString,
-	searchPath: "knex,public"
-});
-
-
-
-var client = new pg.Client(conString);
-client.connect();
+var db  = require("./db");
 
 
 app.get("/", function (req, res) {
 	res.render("index");
+});
+
+app.get("/new_entry", function (req, res) {
+	res.render("entry");
 });
 
 app.post("/", function (req, res) {
