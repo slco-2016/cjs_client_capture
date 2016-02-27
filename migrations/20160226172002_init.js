@@ -13,15 +13,15 @@ exports.up = function(knex, Promise) {
 			table.string("gender");
 			table.timestamp("dob");
 
-			table.string("case_num");
-			table.string("so");
-			table.string("otn");
-
 			table.string("charge_lvl");
 
 			table.string("offense_1");
 			table.string("offense_2");
 			table.string("offense_3");
+
+			table.string("case_num");
+			table.string("so");
+			table.string("otn");
 
 			table.string("notes");
 
