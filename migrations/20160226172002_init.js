@@ -13,6 +13,10 @@ exports.up = function(knex, Promise) {
 			table.string("gender");
 			table.timestamp("dob");
 
+			table.string("phone");
+			table.string("email");
+			table.string("address");
+
 			table.string("charge_lvl");
 
 			table.string("offense_1");
