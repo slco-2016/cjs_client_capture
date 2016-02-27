@@ -27,6 +27,24 @@
 			border-bottom-left-radius: 50px;
 			border-bottom-right-radius: 50px;
 		}
+		.home {
+			float: right;
+			font-size: 0.3em;
+			padding: 3px;
+			background-color: #33C3F0;
+			color: #FFF;
+			border-radius: 3px;
+			cursor: pointer;
+		}
+		.home:hover {
+			-ms-transform: scale(1.1,1.1); /* IE 9 */
+			-webkit-transform: scale(1.1,1.1); /* Chrome, Safari, Opera */
+			transform: scale(1.1,1.1);
+		}
+		.home a {
+			color: #FFF;
+			text-decoration: none;
+		}
 		.head {
 			font-size: 1.5em;
 		}
@@ -64,6 +82,10 @@
 
 	<body>
 		<div class="col_frame">
+
+			<div class="home">
+				<a href="/">Home</a>
+			</div>
 
 			<div class="head">
 				<b>CJS Intake Form</b>

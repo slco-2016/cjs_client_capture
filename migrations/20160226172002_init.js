@@ -60,6 +60,9 @@ exports.up = function(knex, Promise) {
 			table.increments("aid").primary();
 
 			table.string("name");
+			table.string("pass");
+			table.string("email");
+			
 			table.boolean("cjs_perms").defaultTo(false);
 			table.boolean("jail_perms").defaultTo(false);
 			table.boolean("super").defaultTo(false);
