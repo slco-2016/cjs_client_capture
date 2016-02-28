@@ -21,7 +21,11 @@ var bcrypt = require("bcrypt-nodejs");
 var passport = require("passport");
 require("./passport")(passport);
 
-app.use(session({secret: creds.secret}));
+app.use(session({
+	secret: creds.secret,
+	resave: true,
+  saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
