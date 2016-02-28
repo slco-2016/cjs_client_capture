@@ -49,6 +49,27 @@ module.exports = function (passport) {
 							new_admin.email = email;
 							new_admin.pass = hashPw(password);
 
+							// only if a super user is creating a new user
+					    if (req.user && req.user.super) {
+						    if (req.body.hasOwnProperty("cjs_perms")) {
+						    	if (req.body.cjs_perms == "true") {
+						    		new_admin.cjs_perms = true;
+						    	}
+						    }
+						    
+						    if (req.body.hasOwnProperty("jail_perms")) {
+						    	if (req.body.jail_perms == "true") {
+						    		new_admin.jail_perms = true;
+						    	}
+						    }
+						    
+						    if (req.body.hasOwnProperty("super")) {
+						    	if (req.body.super == "true") {
+						    		new_admin.super = true;
+						    	}
+						    }
+					    }
+
 							// insert the new admin user
 							db("admins").insert(new_admin)
 							.then(function () {

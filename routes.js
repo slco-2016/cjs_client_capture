@@ -9,26 +9,26 @@ module.exports = function (app, db, passport) {
 
   app.post("/new_entry", function (req, res) {
     var b = {};
-    b.first = req.body.first,
-    b.middle = req.body.middle,
-    b.last = req.body.last,
-    b.gender = req.body.gender,
-    b.year = req.body.year,
-    b.month = req.body.month,
-    b.day = req.body.day,
-    b.phone = req.body.phone,
-    b.email = req.body.email,
-    b.address = req.body.address,
-    b.charge_lvl = req.body.charge_lvl,
-    b.offense_1 = req.body.offense_1,
-    b.offense_2 = req.body.offense_2,
-    b.offense_3 = req.body.offense_3,
-    b.warrant = req.body.warrant,
-    b.case_num = req.body.case_num,
-    b.otn = req.body.otn,
-    b.so = req.body.so,
-    b.officer_id = req.body.officer_id,
-    b.police_dept = req.body.police_dept,
+    b.first = req.body.first;
+    b.middle = req.body.middle;
+    b.last = req.body.last;
+    b.gender = req.body.gender;
+    b.year = req.body.year;
+    b.month = req.body.month;
+    b.day = req.body.day;
+    b.phone = req.body.phone;
+    b.email = req.body.email;
+    b.address = req.body.address;
+    b.charge_lvl = req.body.charge_lvl;
+    b.offense_1 = req.body.offense_1;
+    b.offense_2 = req.body.offense_2;
+    b.offense_3 = req.body.offense_3;
+    b.warrant = req.body.warrant;
+    b.case_num = req.body.case_num;
+    b.otn = req.body.otn;
+    b.so = req.body.so;
+    b.officer_id = req.body.officer_id;
+    b.police_dept = req.body.police_dept;
     b.notes = req.body.notes;
 
     // make sure required variables are included
@@ -75,7 +75,11 @@ module.exports = function (app, db, passport) {
   });
 
   app.get("/admin/signup", function (req, res) {
-    res.render("signup");
+    var s = false;
+    if (req.hasOwnProperty("user") && req.user.hasOwnProperty("super")) {
+      s = req.user.super;
+    }
+    res.render("signup", {superuser: s});
   });
 
   app.post("/admin/signup", passport.authenticate("local-signup", {

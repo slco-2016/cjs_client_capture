@@ -69,6 +69,41 @@
 					<input type="email" name="email2" placeholder="Email (re-enter)" required>
 				</td> 
 			</tr>
+			
+			<% if (superuser) { %>
+				<tr>
+					<td>
+						<br>Permissions
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<span class="details">CJS Access</span>
+					</td>
+					<td>
+						<input type="checkbox" name="cjs_perms" value="true" style="width: auto;"> <span class="details">(check for CJS portal access)</span>
+					</td> 
+				</tr>
+
+				<tr>
+					<td>
+						<span class="details">Jail Access</span>
+					</td>
+					<td>
+						<input type="checkbox" name="jail_perms" value="true" style="width: auto;"> <span class="details">(check for Jail portal access)</span>
+					</td> 
+				</tr>
+
+				<tr>
+					<td>
+						<span class="details">Super User</span>
+					</td>
+					<td>
+						<input type="checkbox" name="super" value="true" style="width: auto;"> <span class="details">(check for total access)</span>
+					</td> 
+				</tr>
+			<% } %>
 
 		</table>
 
