@@ -24,7 +24,7 @@
 			<ul>
 				<% if (admin.cjs || admin.super) { %>
 					<li><a href="/admin/cjs">CJS Intake Management</a></li>
-					<% if (typeof cjs_stats !== "undefined") { %>
+					<% if (typeof cjs_stats !== "undefined" && Number(cjs_stats.all) > 0) { %>
 						<span class="details">Percentage of intakes processed</span>
 						<div class="progress_bar">
 							<% var pct = Number(cjs_stats.done)/Number(cjs_stats.all)*100 %>
