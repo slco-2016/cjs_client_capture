@@ -110,11 +110,23 @@ module.exports = function (app, db, passport) {
   });
 
   app.get("/admin/cjs", isLoggedIn, function (req, res) {
+
+    // allow for pagination
+    var offset = req.query.offset;
+    if (!offset) { offset = 0; }
+
     if (req.user.cjs_perms) {
-      res.render("cjs")
+      db("clients").limit(25).select().offset(offset)
+      .then(function (clients) {
+        res.render("cjs", {clients: clients})
+      }).catch(function (err) {});
     } else {
       res.redirect("/fail/missingperms");
     }
+  });
+
+  app.get("/admin/cjs/:cid", isLoggedIn, function (req, res) {
+    res.send(req.params.cid);
   });
 
   // fail points

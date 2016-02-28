@@ -1,10 +1,61 @@
 <% include header %>
 
-	<div>
+	<div class="cjs">
 
 		<p>
-			lskdjflksdklfj
+			Current roster
 		</p>
+
+		<table>
+			<tr>
+
+				<th>
+					Name
+				</th>
+				<th>
+					DOB (Y/M/D)
+				</th>
+				<th>
+					Police Dept.
+				</th>
+				<th>
+					Processed
+				</th>
+			</tr>
+
+				<% for (var i=0; i < clients.length; i++) { %>
+					<tr>
+						<td>
+							<a href="/admin/cjs/<%= clients[i].cid %>">
+								<% var name = clients[i].last + ", " + clients[i].first + " " + clients[i].middle %>
+								<% if (name.length > 18) { %>
+									<%= name.substring(0,18) + "..." %>
+								<% } else { %>
+									<%= name %>
+								<% } %>
+
+							</a>
+						</td>
+						<td>
+							<% var d = new Date(clients[i].dob) %>
+							<%= d.getUTCFullYear() + "/" + (d.getUTCMonth()+1) + "/" + d.getUTCDate() %>
+						</td>
+						<td>
+							<%= clients[i].police_dept %>
+						</td>
+						<td>
+							<% if (clients[i].processed) { %>
+								<span style="color:green">Complete</span>
+							<% } else { %>
+								<span style="color:red">Incomplete</span>
+							<% } %>
+						</td>
+					</tr>
+				<% } %>
+
+			</tr>
+		</table>
+		
 
 	</div>
 				
