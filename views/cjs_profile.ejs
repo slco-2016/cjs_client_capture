@@ -1,0 +1,237 @@
+<% include header %>
+
+	<div>
+
+		<div >
+		<form method="post">
+			<% if (client.processed) { %>
+				<input type="text" name="archive" value="false" style="display:none;">
+				<input type="submit" class="label-btn" style="font-size:1em;float:right;background-color:red;border:0px;padding:8px" value="Un-archive">
+			<% } else { %>
+				<input type="text" name="archive" value="true" style="display:none;">
+				<input type="submit" class="label-btn" style="font-size:1em;float:right;background-color:orange;border:0px;padding:8px" value="Archive">
+			<% } %>
+		</form>
+		</div>
+
+		<b>Client Profile</b>
+		<br>
+		<span class="details"><a href="/admin/cjs">Return to clients list</a></span>
+
+		<table>
+			<tr>
+				<td>
+					<br>Name
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">First</span>
+				</td>
+				<td>
+					<%= client.first %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Middle</span>
+				</td>
+				<td>
+					<%= client.middle %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Last</span>
+				</td>
+				<td>
+					<%= client.last %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<br>Details
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Gender</span>
+				</td>
+				<td>
+					<%= client.gender %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">DOB</span>
+				</td>
+				<td>
+					<% var d = new Date(client.dob) %>
+					<%= d.getUTCFullYear() + "/" + (d.getUTCMonth()+1) + "/" + d.getUTCDate() %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<br>Contact
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Phone</span>
+				</td>
+				<td>
+					<%= client.phone %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Email</span>
+				</td>
+				<td>
+					<%= client.email %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Address</span>
+				</td>
+				<td>
+					<%= client.address %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<br>Offense
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Charge Level</span>
+				</td>
+				<td>
+					<%= client.charge_lvl %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Offense 1</span>
+				</td>
+				<td>
+					<%= client.offense_1 %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Offense 2</span>
+				</td>
+				<td>
+					<%= client.offense_2 %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Offense 3</span>
+				</td>
+				<td>
+					<%= client.offense_3 %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<br>Identifiers
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Warrant</span>
+				</td>
+				<td>
+					<%= client.warrant %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Case Number</span>
+				</td>
+				<td>
+					<%= client.case_num %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">OTN</span>
+				</td>
+				<td>
+					<%= client.otn %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">SO</span>
+				</td>
+				<td>
+					<%= client.so %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<br>Officer
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Officer ID</span>
+				</td>
+				<td>
+					<%= client.officer_id %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Police Department</span>
+				</td>
+				<td>
+					<%= client.police_dept %>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Additional Notes</span>
+				</td>
+				<td>
+					<%= client.notes %>
+				</td> 
+			</tr>
+		</table>
+
+		<div class="details" style="margin-top: 20px">
+			This record was created <%= client.created %>.
+		</div>
+
+	</div>
+				
+<% include footer %>

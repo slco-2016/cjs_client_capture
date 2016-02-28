@@ -112,13 +112,14 @@ module.exports = function (app, db, passport) {
   app.get("/admin/cjs", isLoggedIn, function (req, res) {
 
     // allow for pagination
-    var offset = req.query.offset;
+    var offset = Number(req.query.offset);
     if (!offset) { offset = 0; }
 
     if (req.user.cjs_perms) {
       db("clients").limit(25).select().offset(offset)
       .then(function (clients) {
-        res.render("cjs", {clients: clients})
+        offset = Number(offset) + 25;
+        res.render("cjs", {clients: clients, offset: offset})
       }).catch(function (err) {});
     } else {
       res.redirect("/fail/missingperms");
@@ -126,7 +127,29 @@ module.exports = function (app, db, passport) {
   });
 
   app.get("/admin/cjs/:cid", isLoggedIn, function (req, res) {
-    res.send(req.params.cid);
+    db("clients").limit(1).where("cid", req.params.cid)
+    .then(function (client) {
+      res.render("cjs_profile", {client: client[0]});
+    }).catch(function (err) {
+      res.send(err);
+    });
+  });
+
+  app.post("/admin/cjs/:cid", isLoggedIn, function (req, res) {
+    var cid = req.params.cid;
+    if (req.body.hasOwnProperty("archive")) {
+      var toBool = true;
+      if (req.body.archive == "false") { toBool = false; }
+
+      db("clients").where("cid", cid).update({processed: toBool})
+      .then(function (client) {
+        res.redirect("/admin/cjs/" + cid);
+      }).catch(function (err) {
+        res.send(err);
+      });
+    } else {
+      res.redirect("/admin/cjs");
+    }
   });
 
   // fail points

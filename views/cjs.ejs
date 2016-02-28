@@ -55,7 +55,18 @@
 
 			</tr>
 		</table>
-		
+
+		<div style="margin-top:10px;">
+			<center>
+				<% if (offset >= 50) { %>
+					<a href="/admin/cjs?offset=<%= Number(offset) - 50 %>" class="label-btn" style="margin-right: 7px; text-decoration: none;"><< Prev 25 </a>
+				<% } %>
+				
+				<% if (clients.length == 25) { %>
+					<a href="/admin/cjs?offset=<%= offset %>" class="label-btn" style="margin-left: 7px; text-decoration: none;"> Next 25 >></a>
+				<% } %>
+			</center>
+		</div>
 
 	</div>
 				
