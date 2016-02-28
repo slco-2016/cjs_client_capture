@@ -4,6 +4,11 @@
 
 		<p>
 			Current roster
+			<span class="details" style="float:right;">
+				<input type="radio" name="proc_filter" checked onclick="only('both')"/> Both
+				<input type="radio" name="proc_filter" <% if (filter == "complete") { %>checked<% } %>   onclick="only('complete')"/> Only Complete
+				<input type="radio" name="proc_filter" <% if (filter == "incomplete") { %>checked<% } %> onclick="only('incomplete')"/> Only Incomplete
+			</span>
 		</p>
 
 		<table>
@@ -59,15 +64,31 @@
 		<div style="margin-top:10px;">
 			<center>
 				<% if (offset >= 50) { %>
-					<a href="/admin/cjs?offset=<%= Number(offset) - 50 %>" class="label-btn" style="margin-right: 7px; text-decoration: none;"><< Prev 25 </a>
+					<a href="/admin/cjs?offset=<%= Number(offset) - 50 %>" class="label-btn query" style="margin-right: 7px; text-decoration: none;"><< Prev 25 </a>
 				<% } %>
 				
+				<a href="/admin/cjs?offset=<%= Number(offset) - 25 %>" class="label-btn query" style="text-decoration: none;"> Reload </a>
+
 				<% if (clients.length == 25) { %>
-					<a href="/admin/cjs?offset=<%= offset %>" class="label-btn" style="margin-left: 7px; text-decoration: none;"> Next 25 >></a>
+					<a href="/admin/cjs?offset=<%= offset %>" class="label-btn query" style="margin-left: 7px; text-decoration: none;"> Next 25 >></a>
 				<% } %>
 			</center>
 		</div>
 
 	</div>
+
+	<script type="text/javascript">
+		function only (rule) {
+			var list = document.getElementsByClassName("query");
+			for (var i = 0; i < list.length; i++) {
+				var ea = list[i];
+				var pt = ea.href.indexOf("&filter=");
+				if (pt == -1) { pt = ea.href.length; }
+				ea.href = ea.href.substr(0, pt) + "&filter=" + rule;
+			}
+		}
+
+		only("<%= filter %>");
+	</script>
 				
 <% include footer %>

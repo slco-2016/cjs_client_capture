@@ -115,11 +115,23 @@ module.exports = function (app, db, passport) {
     var offset = Number(req.query.offset);
     if (!offset) { offset = 0; }
 
+    // make sure we include or exclude processed
+    var proc1 = true;
+    var proc2 = false;
+
+    var f = "both";
+    if (req.query.hasOwnProperty("filter")) {
+      var g = req.query.filter;
+      if (g == "complete" || g == "incomplete") f = g;
+      if (f == "incomplete") proc1 = null;
+      if (f == "complete") proc2 = null;
+    }
+
     if (req.user.cjs_perms) {
-      db("clients").limit(25).select().offset(offset)
+      db("clients").limit(25).select().offset(offset).where("processed", proc1).orWhere("processed", proc2)
       .then(function (clients) {
         offset = Number(offset) + 25;
-        res.render("cjs", {clients: clients, offset: offset})
+        res.render("cjs", {clients: clients, offset: offset, filter: f})
       }).catch(function (err) {});
     } else {
       res.redirect("/fail/missingperms");
