@@ -10,19 +10,23 @@
 			<p>
 				This is a super user account and has the following special capabilities:
 			</p>
+
+			<ul>
+				<li>Foobar</li>
+			</ul>
 		<% } %>
 
 		<% if (admin.cjs || admin.jail || admin.super) { %>
 			<p>
-				You have access to the following:
+				You <% if (admin.super) { %>also have<% } %> have access to the following:
 			</p>
 
 			<ul>
 				<% if (admin.cjs || admin.super) { %>
-					<li>CJS Intake Management</li>
+					<li><a href="/admin/cjs">CJS Intake Management</a></li>
 				<% } %>
 				<% if (admin.jail || admin.super) { %>
-					<li>Jail Controls</li>
+					<li>Jail Controls (Coming Soon)</li>
 				<% } %>
 			</ul>
 

@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 
 // passport sessions and user management
+var bcrypt = require("bcrypt-nodejs");
 var passport = require("passport");
 require("./passport")(passport);
 
@@ -31,6 +32,10 @@ var db = require("./db");
 db("admins").where("email", creds.superuser.email)
 .then(function (res) {
 	if (res.constructor === Array && res.length == 0) {
+
+		// hash the super user's password
+		creds.superuser.pass = bcrypt.hashSync(creds.superuser.pass, bcrypt.genSaltSync(8), null);
+		
 		db("admins").insert(creds.superuser)
 		.catch(function (err) {
 			throw Error(err);

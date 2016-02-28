@@ -74,16 +74,6 @@ module.exports = function (app, db, passport) {
     res.render("admin");
   });
 
-  app.get("/admin/portal", isLoggedIn, function (req, res) {
-    res.render("portal", {admin: {
-      name: req.user.name,
-      email: req.user.email,
-      cjs: req.user.cjs_perms,
-      jail: req.user.jail_perms,
-      super: req.user.super
-    }});
-  });
-
   app.get("/admin/signup", function (req, res) {
     res.render("signup");
   });
@@ -109,6 +99,24 @@ module.exports = function (app, db, passport) {
     res.redirect("/");
   });
 
+  app.get("/admin/portal", isLoggedIn, function (req, res) {
+    res.render("portal", {admin: {
+      name: req.user.name,
+      email: req.user.email,
+      cjs: req.user.cjs_perms,
+      jail: req.user.jail_perms,
+      super: req.user.super
+    }});
+  });
+
+  app.get("/admin/cjs", isLoggedIn, function (req, res) {
+    if (req.user.cjs_perms) {
+      res.render("cjs")
+    } else {
+      res.redirect("/fail/missingperms");
+    }
+  });
+
   // fail points
   app.get("/fail/signup", function (req, res) {
     res.send("2 possible errors: Email in use or email and password entries do not line up. <a href='/admin/signup'>Try again.</a>");
@@ -120,6 +128,15 @@ module.exports = function (app, db, passport) {
 
   app.get("/fail/notloggedin", function (req, res) {
     res.send("You are not presently logged in. <a href='/admin'>Click here</a> to return to admin index page.");
+  });
+
+  app.get("/fail/missingperms", function (req, res) {
+    res.send("You are missing the permissions to access this content. <a href='/admin'>Click here</a> to return to admin index page.");
+  });
+
+  // catch all rerouter
+  app.get("*", function (req, res) {
+    res.redirect("/");
   });
 
   // utilities

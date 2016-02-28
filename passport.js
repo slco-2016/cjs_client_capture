@@ -1,8 +1,14 @@
 var local = require("passport-local").Strategy;
+var bcrypt = require("bcrypt-nodejs");
 var db = require("./db");
 
 // expose this function to our app using module.exports
 module.exports = function (passport) {
+
+	// bcrypt methods
+	hashPw = function(pw) { return bcrypt.hashSync(pw, bcrypt.genSaltSync(8), null); };
+	validPw = function(pw1, pw2) { return bcrypt.compareSync(pw1, pw2); };
+
 	passport.serializeUser(function (user, done) {
 		done(null, user.aid);
 	});
@@ -41,7 +47,7 @@ module.exports = function (passport) {
 							var new_admin = {};
 							new_admin.name = req.body.name;
 							new_admin.email = email;
-							new_admin.pass = password;
+							new_admin.pass = hashPw(password);
 
 							// insert the new admin user
 							db("admins").insert(new_admin)
@@ -89,7 +95,7 @@ module.exports = function (passport) {
 				.then(function (admin) {
 					if (admin.constructor === Array && admin.length == 1) {
 						admin = admin[0];
-						if (admin.pass == password) {
+						if (validPw(password, admin.pass)) {
 							return done(null, admin);
 
 						// fails because bad password
