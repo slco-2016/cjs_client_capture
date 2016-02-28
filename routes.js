@@ -100,13 +100,34 @@ module.exports = function (app, db, passport) {
   });
 
   app.get("/admin/portal", isLoggedIn, function (req, res) {
-    res.render("portal", {admin: {
+    var admin = {
       name: req.user.name,
       email: req.user.email,
       cjs: req.user.cjs_perms,
       jail: req.user.jail_perms,
       super: req.user.super
-    }});
+    };
+
+    if (admin.cjs_perms || admin.super) {
+      db("clients").count("cid")
+      .then(function (ct0) {
+
+        db("clients").count("cid").where("processed", true)
+        .then(function (ct1) {
+
+          cjs_stats = {all: ct0[0].count, done: ct1[0].count}
+          res.render("portal", {admin: admin, cjs_stats: cjs_stats});
+
+        }).catch(function (err) {
+          res.send(err);
+        })
+        
+      }).catch(function (err) {
+        res.send(err);
+      });
+    } else {
+      res.render("portal", {admin: admin});
+    }
   });
 
   app.get("/admin/cjs", isLoggedIn, function (req, res) {

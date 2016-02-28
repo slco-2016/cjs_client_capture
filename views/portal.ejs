@@ -24,6 +24,15 @@
 			<ul>
 				<% if (admin.cjs || admin.super) { %>
 					<li><a href="/admin/cjs">CJS Intake Management</a></li>
+					<% if (typeof cjs_stats !== "undefined") { %>
+						<span class="details">Percentage of intakes processed</span>
+						<div class="progress_bar">
+							<% var pct = Number(cjs_stats.done)/Number(cjs_stats.all)*100 %>
+							<div class="progress_bar" style="width: <%= pct %>%;">
+								<span class="details" style="color: #FFF; padding-right: 3px; padding-top: 1px; float: right;"><%= Math.round(pct) %>%</span>
+							</div>
+						</div>
+					<% } %>
 				<% } %>
 				<% if (admin.jail || admin.super) { %>
 					<li>Jail Controls (Coming Soon)</li>
