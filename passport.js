@@ -29,8 +29,9 @@ module.exports = function (passport) {
 			// first make sure that pw and emails match
 			var pw_match = (req.body.pass == req.body.pass2);
 			var em_match = (req.body.email == req.body.email2);
+			var name_ok = (req.body.name && req.body.name !== "" && req.body.name.length > 0)
 
-			if (pw_match && em_match) {
+			if (pw_match && em_match && name_ok) {
 				process.nextTick(function () {
 					db("admins").where("email", email).limit(1)
 					.then(function (admin) {
@@ -38,6 +39,7 @@ module.exports = function (passport) {
 							return done(null, false);
 						} else {
 							var new_admin = {};
+							new_admin.name = req.body.name;
 							new_admin.email = email;
 							new_admin.pass = password;
 

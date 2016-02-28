@@ -75,7 +75,13 @@ module.exports = function (app, db, passport) {
   });
 
   app.get("/admin/portal", isLoggedIn, function (req, res) {
-    res.send("sahweet")
+    res.render("portal", {admin: {
+      name: req.user.name,
+      email: req.user.email,
+      cjs: req.user.cjs_perms,
+      jail: req.user.jail_perms,
+      super: req.user.super
+    }});
   });
 
   app.get("/admin/signup", function (req, res) {
@@ -98,6 +104,11 @@ module.exports = function (app, db, passport) {
     })
   );
 
+  app.get("/admin/logout", function (req, res) {
+    req.logout();
+    res.redirect("/");
+  });
+
   // fail points
   app.get("/fail/signup", function (req, res) {
     res.send("2 possible errors: Email in use or email and password entries do not line up. <a href='/admin/signup'>Try again.</a>");
@@ -107,10 +118,14 @@ module.exports = function (app, db, passport) {
     res.send("Bad login; email or password is incorrect. <a href='/admin/login'>Try again.</a>");
   });
 
+  app.get("/fail/notloggedin", function (req, res) {
+    res.send("You are not presently logged in. <a href='/admin'>Click here</a> to return to admin index page.");
+  });
+
   // utilities
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) { return next(); }
-    else { res.redirect('/'); }
+    else { res.redirect("/fail/notloggedin"); }
   }
 
 };

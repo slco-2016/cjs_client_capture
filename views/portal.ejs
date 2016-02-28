@@ -1,0 +1,35 @@
+<% include header %>
+
+	<div>
+
+		<p>
+			Welcome, <%= admin.name %>.
+		</p>
+
+		<% if (admin.super) { %>
+			<p>
+				This is a super user account and has the following special capabilities:
+			</p>
+		<% } %>
+
+		<% if (admin.cjs || admin.jail || admin.super) { %>
+			<p>
+				You have access to the following:
+			</p>
+
+			<ul>
+				<% if (admin.cjs || admin.super) { %>
+					<li>CJS Intake Management</li>
+				<% } %>
+				<% if (admin.jail || admin.super) { %>
+					<li>Jail Controls</li>
+				<% } %>
+			</ul>
+
+		<% } else { %>
+			Warning: This account has no permissions.
+		<% } %>
+
+	</div>
+				
+<% include footer %>

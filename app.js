@@ -1,3 +1,6 @@
+// private stuff
+var creds = require("./creds");
+
 // app initialization
 var express = require("express");
 var app = express();
@@ -17,12 +20,25 @@ app.set("view engine", "ejs");
 var passport = require("passport");
 require("./passport")(passport);
 
-app.use(session({secret: "temporary"}));
+app.use(session({secret: creds.secret}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 // establish database connection
 var db = require("./db");
+
+// create a super user on default
+db("admins").where("email", creds.superuser.email)
+.then(function (res) {
+	if (res.constructor === Array && res.length == 0) {
+		db("admins").insert(creds.superuser)
+		.catch(function (err) {
+			throw Error(err);
+		});
+	}
+}).catch(function (err) {
+	throw Error(err);
+});
 
 // routes
 require("./routes.js")(app, db, passport);

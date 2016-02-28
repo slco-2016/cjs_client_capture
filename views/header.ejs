@@ -83,9 +83,15 @@
 	<body>
 		<div class="col_frame">
 
-			<div class="label-btn" style="float: right;">
-				<a href="/">Home</a>
-			</div>
+			<% if (typeof admin == "undefined") { %>
+				<div class="label-btn" style="float: right;">
+					<a href="/">Home</a>
+				</div>
+			<% } else { %>
+				<div class="label-btn" style="float: right; background-color: red">
+					<a href="/admin/logout">Logout</a>
+				</div>
+			<% } %>
 
 			<div class="head">
 				<b>CJS Intake Form</b>
