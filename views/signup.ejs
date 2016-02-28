@@ -1,0 +1,92 @@
+<% include header %>
+
+	<form onsubmit="return check_matches()" method="post">
+		<b>Create a new admin</b>
+
+		<div id="errors" style="color:red"></div>
+
+		<table>
+
+			<tr>
+				<td>
+					<br>Name
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">First M Last</span>
+				</td>
+				<td>
+					<input type="text" name="name" placeholder="First Middle Last" required>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<br>Password
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Password</span>
+				</td>
+				<td>
+					<input type="password" name="pass" placeholder="Password" required>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Password (re-enter)</span>
+				</td>
+				<td>
+					<input type="password" name="pass2" placeholder="Password (re-enter)" required>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<br>Email
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Email</span>
+				</td>
+				<td>
+					<input type="email" name="email" placeholder="Email" required>
+				</td> 
+			</tr>
+
+			<tr>
+				<td>
+					<span class="details">Email (re-enter)</span>
+				</td>
+				<td>
+					<input type="email" name="email2" placeholder="Email (re-enter)" required>
+				</td> 
+			</tr>
+
+		</table>
+
+		<input type="submit" class="submit_btn" value="Submit">
+
+	</form>
+	
+	<script type="text/javascript">
+		function check_matches () {
+			var pw_match = document.getElementsByName("pass")[0].value == document.getElementsByName("pass2")[0].value;
+			var em_match = document.getElementsByName("email")[0].value == document.getElementsByName("email2")[0].value;
+			if (pw_match && em_match) {
+				return true;
+			} else {
+				document.getElementById("errors").textContent = "Email or password does not match. Check them and try submitting again."
+				return false;
+			};
+		}
+	</script>
+
+<% include footer %>

@@ -71,9 +71,46 @@ module.exports = function (app, db, passport) {
   });
 
   app.get("/admin", function (req, res) {
-    db.select().table("clients").then(function (rows) {
-      res.send(rows);
-    });
-
+    res.render("admin");
   });
-}
+
+  app.get("/admin/portal", isLoggedIn, function (req, res) {
+    res.send("sahweet")
+  });
+
+  app.get("/admin/signup", function (req, res) {
+    res.render("signup");
+  });
+
+  app.post("/admin/signup", passport.authenticate("local-signup", {
+      successRedirect: "/admin/portal",
+      failureRedirect: "/fail/signup"
+    })
+  );
+
+  app.get("/admin/login", function (req, res) {
+    res.render("login");
+  });
+
+  app.post("/admin/login", passport.authenticate("local-login", {
+      successRedirect: "/admin/portal",
+      failureRedirect: "/fail/login"
+    })
+  );
+
+  // fail points
+  app.get("/fail/signup", function (req, res) {
+    res.send("2 possible errors: Email in use or email and password entries do not line up. <a href='/admin/signup'>Try again.</a>");
+  });
+
+  app.get("/fail/login", function (req, res) {
+    res.send("Bad login; email or password is incorrect. <a href='/admin/login'>Try again.</a>");
+  });
+
+  // utilities
+  function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    else { res.redirect('/'); }
+  }
+
+};

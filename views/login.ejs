@@ -1,0 +1,32 @@
+<% include header %>
+
+	<form onsubmit="return check_matches()" method="post">
+		<b>Login</b>
+
+		<table>
+
+			<tr>
+				<td>
+					<span class="details">Email</span>
+				</td>
+				<td>
+					<input type="email" name="email" placeholder="Email" required>
+				</td> 
+			</tr>
+			
+			<tr>
+				<td>
+					<span class="details">Password</span>
+				</td>
+				<td>
+					<input type="password" name="pass" placeholder="Password" required>
+				</td> 
+			</tr>
+
+		</table>
+
+		<input type="submit" class="submit_btn" value="Submit">
+
+	</form>
+
+<% include footer %>

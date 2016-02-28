@@ -15,7 +15,7 @@ app.set("view engine", "ejs");
 
 // passport sessions and user management
 var passport = require("passport");
-require('./config/passport')(passport);
+require("./passport")(passport);
 
 app.use(session({secret: "temporary"}));
 app.use(passport.initialize());
