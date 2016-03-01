@@ -33,8 +33,9 @@ exports.up = function(knex, Promise) {
 			table.string("officer_id");
 			table.string("police_dept");
 
+			table.boolean("accepted");
 			table.boolean("processed").defaultTo(false);
-			
+
 			table.timestamp("updated");
 			table.timestamp("created").defaultTo(knex.fn.now());
 		}),

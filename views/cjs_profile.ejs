@@ -4,13 +4,12 @@
 
 		<div >
 		<form method="post">
-			<% if (client.processed) { %>
-				<input type="text" name="archive" value="false" style="display:none;">
-				<input type="submit" class="label-btn" style="font-size:1em;float:right;background-color:red;border:0px;padding:8px" value="Un-archive">
-			<% } else { %>
-				<input type="text" name="archive" value="true" style="display:none;">
-				<input type="submit" class="label-btn" style="font-size:1em;float:right;background-color:orange;border:0px;padding:8px" value="Archive">
-			<% } %>
+			<input type="text" name="accept" value="true" style="display:none;">
+			<input type="submit" class="label-btn" style="font-size:1em;float:right;background-color:green;border:0px;padding:8px" value="Accept">
+		</form>
+		<form method="post">
+			<input type="text" name="accept" value="false" style="display:none;">
+			<input type="submit" class="label-btn" style="font-size:1em;float:right;margin-right:10px;background-color:red;border:0px;padding:8px" value="Reject">
 		</form>
 		</div>
 
@@ -233,5 +232,5 @@
 		</div>
 
 	</div>
-				
+
 <% include footer %>

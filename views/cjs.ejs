@@ -26,39 +26,52 @@
 				<th>
 					Processed
 				</th>
+				<th>
+					Accepted
+				</th>
 			</tr>
 
-				<% for (var i=0; i < clients.length; i++) { %>
-					<tr>
-						<td>
-							<a href="/admin/cjs/<%= clients[i].cid %>">
-								<% var name = clients[i].last + ", " + clients[i].first + " " + clients[i].middle %>
-								<% if (name.length > 18) { %>
-									<%= name.substring(0,18) + "..." %>
-								<% } else { %>
-									<%= name %>
-								<% } %>
-
-							</a>
-						</td>
-						<td>
-							<% var d = new Date(clients[i].dob) %>
-							<%= d.getUTCFullYear() + "/" + (d.getUTCMonth()+1) + "/" + d.getUTCDate() %>
-						</td>
-						<td>
-							<%= clients[i].police_dept %>
-						</td>
-						<td>
-							<% if (clients[i].processed) { %>
-								<span style="color:green">Complete</span>
+			<% for (var i=0; i < clients.length; i++) { %>
+				<tr>
+					<td>
+						<a href="/admin/cjs/<%= clients[i].cid %>">
+							<% var name = clients[i].last + ", " + clients[i].first + " " + clients[i].middle %>
+							<% if (name.length > 18) { %>
+								<%= name.substring(0,18) + "..." %>
 							<% } else { %>
-								<span style="color:red">Incomplete</span>
+								<%= name %>
 							<% } %>
-						</td>
-					</tr>
-				<% } %>
 
-			</tr>
+						</a>
+					</td>
+					<td>
+						<% var d = new Date(clients[i].dob) %>
+						<%= d.getUTCFullYear() + "/" + (d.getUTCMonth()+1) + "/" + d.getUTCDate() %>
+					</td>
+					<td>
+						<%= clients[i].police_dept %>
+					</td>
+					<td>
+						<% if (clients[i].processed) { %>
+							<span style="color:green">Complete</span>
+						<% } else { %>
+							<span style="color:red">Incomplete</span>
+						<% } %>
+					</td>
+					<td>
+						<% if (clients[i].accepted == undefined) { %>
+							-
+						<% } else { %>
+							<% if (clients[i].accepted) { %>
+								<span style="color:green">Accepted</span>
+							<% } else { %>
+								<span style="color:red">Rejected</span>
+							<% } %>
+						<% } %>
+					</td>
+				</tr>
+			<% } %>
+
 		</table>
 
 		<div style="margin-top:10px;">

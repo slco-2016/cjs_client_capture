@@ -174,13 +174,13 @@ module.exports = function (app, db, passport) {
 
   app.post("/admin/cjs/:cid", isLoggedIn, function (req, res) {
     var cid = req.params.cid;
-    if (req.body.hasOwnProperty("archive")) {
+    if (req.body.hasOwnProperty("accept")) {
       var toBool = true;
-      if (req.body.archive == "false") { toBool = false; }
+      if (req.body.accept == "false") { toBool = false; }
 
-      db("clients").where("cid", cid).update({processed: toBool})
+      db("clients").where("cid", cid).update({processed: true, accepted: toBool})
       .then(function (client) {
-        res.redirect("/admin/cjs/" + cid);
+        res.redirect("/admin/cjs/");
       }).catch(function (err) {
         res.send(err);
       });
